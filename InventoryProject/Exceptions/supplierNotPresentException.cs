@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace InventoryProject.Exceptions
 {
-    internal class ProductAllreadyPresentException:Exception
+    internal class supplierNotPresentException:Exception
     {
-        public ProductAllreadyPresentException(string message):base(message) { }
+        public supplierNotPresentException(string message):base(message) { }
     }
 }

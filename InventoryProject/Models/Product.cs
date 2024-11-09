@@ -15,12 +15,23 @@ namespace InventoryProject.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int Quantity { get; set; }
-        public int UnitPrice { get; set; }
+        public double UnitPrice { get; set; }
 
         //Navigation
         public Inventory Inventory { get; set; }
 
         [ForeignKey("Inventory")]
         public int InventoryId { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"Product Id : {ProductId}\n" +
+                $"Name : {Name}\n" +
+                $"Description : {Description}\n" +
+                $"Quantity : {Quantity}\n" +
+                $"UnitPrice : {UnitPrice}\n" +
+                $"=====================================\n";
+        }
     }
 }

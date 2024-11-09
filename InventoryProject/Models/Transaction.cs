@@ -24,5 +24,16 @@ namespace InventoryProject.Models
         [ForeignKey("Inventory")]
         public int InventoryId { get; set; }
 
+
+        public override string ToString()
+        {
+            return $"Transaction Id : {TransactionId}\n" +
+                $"Product Id : {ProductId}\n" +
+                $"Type : {Type.ToString()}\n" +
+                $"Quantity : {Quantity}\n" +
+                $"Date : {Date}\n" +
+                $"Inventory Id : {InventoryId}\n";
+        }
+
     }
 }

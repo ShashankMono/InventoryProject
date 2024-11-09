@@ -20,5 +20,13 @@ namespace InventoryProject.Models
 
         [ForeignKey("Inventory")]
         public int InventoryId  { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"Supplier Id : {SupplierId}\n" +
+                $"Name : {Name}\n" +
+                $"Constact Number : {ContactNumber}\n";
+        }
     }
 }
