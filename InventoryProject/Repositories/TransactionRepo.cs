@@ -19,14 +19,17 @@ namespace InventoryProject.Repositories
             _productRepo = new ProductRepo();
         }
 
-        public void AddStock(int id)
+        public void ManipulateStock(Product product,Transaction transaction)
         {
-
-            Product product = _productRepo.Get(id);
-
-
+            _productRepo.Update(product);
+            _context.Transactions.Add(transaction);
+            _context.SaveChanges();
+            
         }
 
-
+        public List<Transaction> GetAll()
+        {
+            return _context.Transactions.ToList();
+        }
     }
 }

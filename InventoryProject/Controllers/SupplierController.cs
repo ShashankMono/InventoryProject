@@ -18,12 +18,13 @@ namespace InventoryProject.Controllers
             _repo = new SuppliersRepo();
         }
 
-        public void AddNewSupplier(string name,string contactNumber)
+        public void AddNewSupplier(string name,string contactNumber,int inventoryId)
         {
             Supplier supplier = new Supplier()
             {
                 Name = name,
-                ContactNumber = contactNumber
+                ContactNumber = contactNumber,
+                InventoryId = inventoryId,
             };
             _repo.Add(supplier);
         }
@@ -38,10 +39,11 @@ namespace InventoryProject.Controllers
             return supplier;
         }
 
-        public void UpdateDetails(Supplier supplier, string name, string contactNumber)
+        public void UpdateDetails(Supplier supplier, string name, string contactNumber,int invetoryId)
         {
             supplier.Name = name;
             supplier.ContactNumber = contactNumber;
+            supplier.InventoryId = invetoryId;
             _repo.Update(supplier);
         }
 

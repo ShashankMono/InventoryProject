@@ -19,14 +19,15 @@ namespace InventoryProject.Controllers
             _repo = new ProductRepo();
         }
 
-        public void AddNewProduct( string name, string description, int quantity, double unitprice)
+        public void AddNewProduct( string name, string description, int quantity, double unitprice,int inventoryId)
         {
             Product product = new Product()
             {
                 Name = name,
                 Description = description,
                 Quantity = quantity,
-                UnitPrice = unitprice
+                UnitPrice = unitprice,
+                InventoryId = inventoryId,
             };
             _repo.Add(product);
         }
@@ -41,11 +42,12 @@ namespace InventoryProject.Controllers
             return product;
         }
 
-        public void UpdateDetails(Product product,string name, string description,double price)
+        public void UpdateDetails(Product product,string name, string description,double price,int inventoryId)
         {
             product.Name = name;
             product.Description = description;
             product.UnitPrice = price;
+            product.InventoryId = inventoryId;
             _repo.Update(product);
         }
 

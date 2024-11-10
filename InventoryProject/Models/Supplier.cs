@@ -26,7 +26,9 @@ namespace InventoryProject.Models
         {
             return $"Supplier Id : {SupplierId}\n" +
                 $"Name : {Name}\n" +
-                $"Constact Number : {ContactNumber}\n";
+                $"Constact Number : {ContactNumber}\n" +
+                $"Inventory Id : {InventoryId}\n" +
+                $"==========================================\n";
         }
     }
 }

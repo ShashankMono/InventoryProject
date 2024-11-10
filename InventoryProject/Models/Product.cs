@@ -31,6 +31,7 @@ namespace InventoryProject.Models
                 $"Description : {Description}\n" +
                 $"Quantity : {Quantity}\n" +
                 $"UnitPrice : {UnitPrice}\n" +
+                $"Inventory Id : {InventoryId}\n" +
                 $"=====================================\n";
         }
     }

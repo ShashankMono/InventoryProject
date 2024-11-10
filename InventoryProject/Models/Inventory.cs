@@ -17,5 +17,12 @@ namespace InventoryProject.Models
         public List<Product> Products { get; set; }
         public List<Supplier> Suppliers { get; set; }
         public List<Transaction> Transactions { get; set; }
+
+        public override string ToString()
+        {
+            return $"Inventory Id: {InventoryId}\n" +
+                $"Location : {Location}\n" +
+                $"======================================";
+        }
     }
 }
