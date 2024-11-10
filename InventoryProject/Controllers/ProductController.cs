@@ -1,6 +1,7 @@
 ﻿using InventoryProject.Exceptions;
 using InventoryProject.Models;
 using InventoryProject.Repositories;
+using InventoryProject.TypeOfTransaction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,11 @@ namespace InventoryProject.Controllers
 
         public void AddNewProduct( string name, string description, int quantity, double unitprice,int inventoryId)
         {
-            Product product = new Product()
+            if(quantity <= 0)
+            {
+                throw new QuantityCannotBeZeroOrNegativException("Quantity cannot be zeror or negative\n");
+            }
+            Product newProduct = new Product()
             {
                 Name = name,
                 Description = description,
@@ -29,12 +34,22 @@ namespace InventoryProject.Controllers
                 UnitPrice = unitprice,
                 InventoryId = inventoryId,
             };
-            _repo.Add(product);
+            _repo.Add(newProduct);
+            Product product = _repo.GetByName(newProduct.Name);
+            Transaction transaction = new Transaction()
+            {
+                ProductId = product.ProductId,
+                Quantity = quantity,
+                Type =TypeOfTransactions.Add,
+                Date = DateTime.Now,
+                InventoryId = product.InventoryId,
+            };
+            _repo.AddFirstTransaction(transaction);
         }
 
         public Product GetProduct(int id)
         {
-            Product product = _repo.Get(id);
+            Product product = _repo.GetById(id);
             if (product == null)
             {
                 throw new ProductNotPresentException("Product Not present, provide correct product Id");

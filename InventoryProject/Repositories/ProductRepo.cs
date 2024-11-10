@@ -42,13 +42,24 @@ namespace InventoryProject.Repositories
             _context.SaveChanges();
         }
 
-        public Product Get(int id)
+        public Product GetById(int id)
         {
             return _context.Products.Where(p => p.ProductId == id).FirstOrDefault();
         }
 
+        public Product GetByName(string name)
+        {
+            return _context.Products.Where(p => p.Name == name).FirstOrDefault();
+        }
+
         public List<Product> GetAll() { 
             return _context.Products.ToList();
+        }
+
+        public void AddFirstTransaction(Transaction transaction)
+        {
+            _context.Transactions.Add(transaction);
+            _context.SaveChanges();
         }
     }
 }
