@@ -1,4 +1,5 @@
-﻿using InventoryProject.Models;
+﻿using InventoryProject.Exceptions;
+using InventoryProject.Models;
 using InventoryProject.Repositories;
 using InventoryProject.TypeOfTransaction;
 using System;
@@ -44,12 +45,17 @@ namespace InventoryProject.Controllers
 
         public string GetAllTransaction()
         {
-            string transactionHistory = "";
-            _transactionRepo.GetAll().ForEach((t) =>
+            List<Transaction> transactions = _transactionRepo.GetAll();
+            if (transactions.Count == 0)
             {
-                transactionHistory += t.ToString();
-            });
-            return transactionHistory;
+                throw new NoTransactionPresentException("No transaction present!");
+            }
+            string details = "";
+            foreach (Transaction transaction in transactions)
+            {
+                details += transaction.ToString();
+            }
+            return details;
         }
 
     }

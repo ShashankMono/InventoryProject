@@ -56,7 +56,7 @@ namespace InventoryProject.Repositories
             return _context.Products.ToList();
         }
 
-        public void AddFirstTransaction(Transaction transaction)
+        public void AddTransaction(Transaction transaction)
         {
             _context.Transactions.Add(transaction);
             _context.SaveChanges();

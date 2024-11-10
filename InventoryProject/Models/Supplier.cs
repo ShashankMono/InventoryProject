@@ -22,6 +22,7 @@ namespace InventoryProject.Models
         public int InventoryId  { get; set; }
 
 
+
         public override string ToString()
         {
             return $"Supplier Id : {SupplierId}\n" +

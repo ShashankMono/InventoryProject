@@ -289,7 +289,14 @@ namespace InventoryProject.Presentation
         }
         public static void GetAllDetail(Controller controller)
         {
-            Console.WriteLine(controller.GetAllDetails());
+            try
+            {
+                Console.WriteLine(controller.GetAllDetails());
+            }
+            catch (Exception ex) {
+                Console.WriteLine($"{ex.Message}");
+            }
+            
         }
 
         public static void DisplayTransactionMenu()
@@ -300,8 +307,9 @@ namespace InventoryProject.Presentation
                     "1. Add Stock\n" +
                     "2. Remove Stock\n" +
                     "3. View All transaction\n" +
-                    "4. Go back to main memory\n");
+                    "4. Go back to main menu\n");
                 int choice = int.Parse(Console.ReadLine()) ;
+                ExcuteTransactionMenu(choice);
             }
         }
 
@@ -317,7 +325,7 @@ namespace InventoryProject.Presentation
                     Stock(controller,TypeOfTransactions.Remove);
                     break;
                 case 3:
-                    Console.WriteLine(controller.GetAllTransaction());
+                    ShowTransactions(controller);
                     break;
                 case 4:
                     DisplayMainMenu();
@@ -328,6 +336,17 @@ namespace InventoryProject.Presentation
             }
         }
 
+        public static void ShowTransactions(TransactionController controller)
+        {
+            try
+            {
+                Console.WriteLine(controller.GetAllTransaction());
+            }catch (Exception ex) { 
+                Console.WriteLine(ex.ToString()); 
+            }
+
+        }
+
         public static void Stock(TransactionController controller,TypeOfTransactions type)
         {
             try
@@ -335,19 +354,26 @@ namespace InventoryProject.Presentation
                 Console.WriteLine("Enter product Id: ");
                 int id = int.Parse(Console.ReadLine());
                 Product product = productController.GetProduct(id);
+
                 Console.WriteLine("Enter Quantity: ");
                 int quantity = int.Parse(Console.ReadLine());
+
+                if (product.Quantity <= 0 || quantity > product.Quantity)
+                    throw new InsufficientStockException("Insufficient Stock!");
+
                 controller.ChangeStock(product,quantity,type);
                 Console.WriteLine($"Stock Update : {type.ToString()}");
+
             }catch (Exception ex) { 
-                Console.WriteLine(ex.ToString()); 
+                Console.WriteLine($"{ex.Message}"); 
             }
         }
 
         public static void GetReport()
         {
             InventoryController inventoryController = new InventoryController();
-            Console.WriteLine(inventoryController.GetAllReport());
+            Console.WriteLine($"===================Report===================\n" +
+                $"{inventoryController.GetAllReport()}\n");
         }
 
     }

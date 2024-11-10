@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace InventoryProject.Exceptions
 {
-    internal class QuantityCannotBeZeroOrNegativException:Exception
+    internal class NoSupplierPresentException:Exception
     {
-        public QuantityCannotBeZeroOrNegativException(string message) : base(message) { }
+
+        public NoSupplierPresentException(string message):base(message) { }
     }
 }

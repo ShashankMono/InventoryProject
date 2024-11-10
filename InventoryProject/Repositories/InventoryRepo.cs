@@ -20,8 +20,8 @@ namespace InventoryProject.Repositories
 
         public List<Inventory> InventoriesReport()
         {
-            return _context.inventories.Include(i=> i.Transactions)
-                .ThenInclude(i=> i.Product).ToList();
+            return _context.inventories.Include(i=> i.Products)
+                .Include(i=> i.Suppliers).Include(i=>i.Transactions).ToList();
         }
     }
 }

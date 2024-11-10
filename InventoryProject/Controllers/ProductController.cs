@@ -36,15 +36,20 @@ namespace InventoryProject.Controllers
             };
             _repo.Add(newProduct);
             Product product = _repo.GetByName(newProduct.Name);
+            AddTransaction(product,TypeOfTransactions.Add);
+        }
+
+        public void AddTransaction(Product product,TypeOfTransactions type)
+        {
             Transaction transaction = new Transaction()
             {
                 ProductId = product.ProductId,
-                Quantity = quantity,
-                Type =TypeOfTransactions.Add,
+                Quantity = product.Quantity,
+                Type = type,
                 Date = DateTime.Now,
                 InventoryId = product.InventoryId,
             };
-            _repo.AddFirstTransaction(transaction);
+            _repo.AddTransaction(transaction);
         }
 
         public Product GetProduct(int id)
@@ -74,12 +79,17 @@ namespace InventoryProject.Controllers
         public void Delete(int id)
         {
             Product product = GetProduct(id);
+            AddTransaction(product,TypeOfTransactions.Remove);
             _repo.Delete(product);
         }
 
         public string GetAllDetails()
         {
             List<Product> products = _repo.GetAll();
+            if(products.Count == 0)
+            {
+                throw new NoProductPresentException("No product present!");
+            }
             string details = "";
             foreach (Product product in products) {
                 details += product.ToString() ;

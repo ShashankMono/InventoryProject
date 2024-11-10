@@ -22,7 +22,7 @@ namespace InventoryProject.Models
         {
             return $"Inventory Id: {InventoryId}\n" +
                 $"Location : {Location}\n" +
-                $"======================================";
+                $"======================================\n";
         }
     }
 }

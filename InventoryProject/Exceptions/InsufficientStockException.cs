@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace InventoryProject.Exceptions
 {
-    internal class QuantityCannotBeZeroOrNegativException:Exception
+    internal class InsufficientStockException:Exception
     {
-        public QuantityCannotBeZeroOrNegativException(string message) : base(message) { }
+        public InsufficientStockException(string message):base(message){}
     }
 }

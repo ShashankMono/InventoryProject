@@ -62,6 +62,10 @@ namespace InventoryProject.Controllers
         public string GetAllDetails()
         {
             List<Supplier> suppliers = _repo.GetAll();
+            if (suppliers.Count == 0)
+            {
+                throw new NoSupplierPresentException("No supplier present!");
+            }
             string details = "";
             foreach (Supplier supplier in suppliers)
             {

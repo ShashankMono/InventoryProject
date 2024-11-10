@@ -21,14 +21,15 @@ namespace InventoryProject.Controllers
             _repo.InventoriesReport().ForEach((inventory) =>
             {
                 Report += inventory.ToString();
-                inventory.Transactions.ForEach((Transaction) =>
+                inventory.Products.ForEach((product) =>
                 {
-                    Report += Transaction.ToString();
-                    Transaction.Inventory.Suppliers.ForEach((product) => {
-                        Report += product.ToString();
-                        //supplier.Inventory.Transactions.ForEach((transaction) => { 
-                        //    Report = transaction.ToString();
-                        //});
+                    Report += product.ToString();
+                    inventory.Suppliers.ForEach((supplier) =>
+                    {
+                        Report += supplier.ToString();
+                        inventory.Transactions.ForEach((transaction) => { 
+                            Report += transaction.ToString();
+                        });
                     });
                 });
             });

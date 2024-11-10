@@ -24,6 +24,7 @@ namespace InventoryProject.Models
         [ForeignKey("Inventory")]
         public int InventoryId { get; set; }
 
+        
 
         public override string ToString()
         {
@@ -32,7 +33,8 @@ namespace InventoryProject.Models
                 $"Type : {Type.ToString()}\n" +
                 $"Quantity : {Quantity}\n" +
                 $"Date : {Date}\n" +
-                $"Inventory Id : {InventoryId}\n";
+                $"Inventory Id : {InventoryId}\n" +
+                $"=====================================\n";
         }
 
     }
